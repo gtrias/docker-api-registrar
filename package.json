@@ -1,0 +1,24 @@
+{
+  "name": "docker-api-registrar",
+  "version": "1.0.0",
+  "description": "Watch docker activity and auto-register to external API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gtrias/docker-api-registrar.git"
+  },
+  "keywords": [
+    "docker",
+    "api",
+    "nginx"
+  ],
+  "author": "Genar <genar@acs.li>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/gtrias/docker-api-registrar/issues"
+  },
+  "homepage": "https://github.com/gtrias/docker-api-registrar#readme"
+}
