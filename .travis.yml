@@ -7,7 +7,7 @@ services:
   - docker
 
 install:
-  - docker build -t gtrias/docker-api-registar .
+  - docker build -t gtrias/docker-api-registrar .
   - npm install
 
 script:
