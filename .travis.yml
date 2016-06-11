@@ -11,11 +11,11 @@ install:
   - npm install
 
 script:
-  - docker run -d --name docker-api-registar gtrias/docker-api-registar
-  - docker ps | grep -q  docker-api-registar
+  - docker run -d --name docker-api-registar gtrias/docker-api-registrar
+  - docker ps | grep -q  docker-api-registrar
 
 after_success:
   - if [ "$TRAVIS_BRANCH" == "master" ]; then
     docker login -e="$DOCKER_EMAIL" -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push gtrias/docker-api-registar;
+    docker push gtrias/docker-api-registrar;
     fi
