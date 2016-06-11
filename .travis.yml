@@ -8,7 +8,6 @@ services:
 
 install:
   - docker build -t gtrias/docker-api-registar .
-  - docker logs docker-api-registar
   - npm install
 
 script:
