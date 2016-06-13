@@ -1,5 +1,6 @@
 var Dockerode = require('dockerode');
 var DockerEvents = require('docker-events');
+var nginxApi = require('./http/nginx-api');
 
 var options = {
     socketPath: '/var/run/docker.sock'
@@ -12,5 +13,5 @@ var emitter = new DockerEvents({
 emitter.start();
 
 emitter.on("start", function(message) {
-    console.log("container started: %j", message);
+    nginxApi.postHost(message);
 });
