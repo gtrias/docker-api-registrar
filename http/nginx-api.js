@@ -1,18 +1,33 @@
 var request = require('request');
 var manager = require('../docker/manager');
 
-exports.postHost = function(dockerMessage) {
-    var container = manager
-        .getContainer(dockerMessage.id)
-    ;
+exports.post = function(hosts) {
+    var payload = this.populatePayload(hosts);
+    request.post('http://nginxApi:1337/virtualhosts', payload);
+}
 
-    if (container !== undefined) {
-        var data = container.inspect(function (err, data) {
-            var env = data.Config.Env;
+exports.populatePayload = function(hosts) {
+    var virtualHosts = [];
+    for (i in hosts) {
+        var host = hosts[i];
 
-            for (i in env) {
-                console.log(env[i]);
+        var payload = {
+            name: "host",
+            portsPlain: "80",
+            locations: {
+                path: "/",
+                backends: [
+                    {
+                        ip: "123.123.123.123",
+                        ports: "80"
+                    }
+                ]
+
             }
-        });
+        }
+
+        virtualHosts.push(payload);
     }
+
+    return virtualHosts;
 }
