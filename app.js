@@ -1,15 +1,12 @@
-var Dockerode = require('dockerode');
 var DockerEvents = require('docker-events');
 var nginxApi = require('./http/nginx-api');
-
-var options = {
-    socketPath: '/var/run/docker.sock'
-};
+var dockerManager = require('./docker/manager');
 
 var emitter = new DockerEvents({
-    docker: new Dockerode(options),
+    docker: dockerManager.getInstance(),
 });
 
+console.log('Listening events');
 emitter.start();
 
 emitter.on("start", function(message) {
