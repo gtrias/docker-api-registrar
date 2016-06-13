@@ -30,7 +30,7 @@ emitter.on("start", function(message) {
             }
             console.log('Registering host %s', virtualHosts);
 
-            nginxApi.post(virtualHosts);
+            nginxApi.post(virtualHosts, data);
         });
 
     }

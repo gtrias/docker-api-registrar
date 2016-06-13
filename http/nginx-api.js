@@ -1,37 +1,40 @@
 var request = require('request');
 var manager = require('../docker/manager');
 
-exports.post = function(hosts) {
-    var payload = this.populatePayload(hosts);
-    request.post({ url: 'http://nginxApi:1337/virtualhosts', form: payload }, function(err,httpResponse, body) {
-        console.log(err);
-        console.log(httpResponse);
+exports.post = function(hosts, container) {
+    var payload = this.populatePayload(hosts, container);
+    console.log("POSTing:");
+    console.log(payload);
+    request.post({ url: 'http://nginxApi:1337/virtualhosts', body: payload, json: true }, function(err,httpResponse, body) {
+        if (err) {
+            console.log("Result: %s", err);
+        }
+
+        console.log("Result:");
         console.log(body);
     });
 }
 
-exports.populatePayload = function(hosts) {
+exports.populatePayload = function(hosts, container) {
+    // console.log(container);
+    var ip = container.NetworkSettings.IPAddress;
+    console.log(ip);
     var virtualHosts = [];
-    for (i in hosts) {
-        var host = hosts[i];
-
-        var payload = {
-            name: "host",
-            portsPlain: "80",
-            locations: {
-                path: "/",
-                backends: [
-                    {
-                        ip: "123.123.123.123",
-                        ports: "80"
-                    }
-                ]
-
-            }
+    var payload = {
+        name: hosts[0][1],
+        portsPlain: "80",
+        locations: {
+            path: "/",
+            backends: [
+                {
+                    ip: ip,
+                    ports: "80",
+                }
+            ]
         }
-
-        virtualHosts.push(payload);
     }
+
+    virtualHosts.push(payload);
 
     return virtualHosts;
 }
