@@ -5,7 +5,7 @@ exports.post = function(hosts, container) {
     var payload = this.populatePayload(hosts, container);
     console.log("POSTing:");
     console.log(payload);
-    request.post({ url: 'http://nginxApi:1337/virtualhosts', body: payload, json: true }, function(err,httpResponse, body) {
+    request.post({ url: 'http://nginxApi:1337/virtualhost', body: payload, json: true }, function(err,httpResponse, body) {
         if (err) {
             console.log("Result: %s", err);
         }
@@ -18,10 +18,16 @@ exports.post = function(hosts, container) {
 exports.populatePayload = function(hosts, container) {
     // console.log(container);
     var ip = container.NetworkSettings.IPAddress;
+
+    if (ip === undefined || hosts === undefined) {
+        return [];
+    }
+
     console.log(ip);
+    console.log(hosts);
     var virtualHosts = [];
     var payload = {
-        name: hosts[0][1],
+        name: hosts[0],
         portsPlain: "80",
         locations: {
             path: "/",

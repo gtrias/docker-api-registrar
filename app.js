@@ -25,7 +25,7 @@ emitter.on("start", function(message) {
                 res = env[i].split("=");
 
                 if (res[0] === 'VIRTUAL_HOST') {
-                    virtualHosts.push(res);
+                    virtualHosts.push(res[1]);
                 }
             }
             console.log('Registering host %s', virtualHosts);
