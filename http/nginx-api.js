@@ -3,7 +3,11 @@ var manager = require('../docker/manager');
 
 exports.post = function(hosts) {
     var payload = this.populatePayload(hosts);
-    request.post('http://nginxApi:1337/virtualhosts', payload);
+    request.post({ url: 'http://nginxApi:1337/virtualhosts', form: payload }, function(err,httpResponse, body) {
+        console.log(err);
+        console.log(httpResponse);
+        console.log(body);
+    });
 }
 
 exports.populatePayload = function(hosts) {

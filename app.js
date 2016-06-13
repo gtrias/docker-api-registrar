@@ -28,6 +28,7 @@ emitter.on("start", function(message) {
                     virtualHosts.push(res);
                 }
             }
+            console.log('Registering host %s', virtualHosts);
 
             nginxApi.post(virtualHosts);
         });
