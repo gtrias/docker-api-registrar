@@ -1,6 +1,6 @@
 var DockerEvents = require('docker-events');
-var nginxApi = require('./http/nginx-api');
-var manager = require('./docker/manager');
+var nginxApi = require('./lib/http/nginx-api');
+var manager = require('./lib/docker/manager');
 
 var emitter = new DockerEvents({
     docker: manager.getInstance(),

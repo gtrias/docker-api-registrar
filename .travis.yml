@@ -11,6 +11,7 @@ install:
   - npm install
 
 script:
+  - npm test
   - docker run -d --name docker-api-registar gtrias/docker-api-registrar
   - docker ps | grep -q  docker-api-registrar
 
