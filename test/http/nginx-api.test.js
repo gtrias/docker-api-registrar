@@ -1,5 +1,6 @@
 var NginxApi = require('../../lib/http/nginx-api.js');
-var expect = require('chai').expect();
+var chai = require('chai');
+var expect = require('chai').expect;
 
 describe("NginxApi", function(done){
    describe("#populatePayload()", function(){
@@ -8,8 +9,8 @@ describe("NginxApi", function(done){
            var container = {};
 
            var payload = NginxApi.populatePayload(hosts, container);
-           expect(payload).to.be(undefined);
-           dome();
+           expect(payload).to.be.undefined;
+
        });
    });
 });
